@@ -151,3 +151,59 @@ of filenames
 	
 *count the number of alphabets in the file
 *count the occurrences of ovals in the given file
+
+				slide 94
+
+1. Insert an heading at the beginning of the file
+2 Remove the second line in the file and try undo 
+command
+	press 'esc' to go to command mode
+	place cursor on 2nd line and type 'dd'
+	to undo- press 'u'
+3 Search for all occurrences of bc
+	go to last line mode by pressing ':'
+	/bc 
+4 Remove the word number
+	:1,$s/number/ 
+5 Replace all occurrences of char c in line1 only with C
+	:1s/c/C
+6 Replace all occurrences of space with \t
+	:1,$s/ /\t/g
+7. copy line 1 to 3 and paste at the end of the file
+	To copy place cursor on 1st line press '3yy'
+	To paste place cursor at last line press 'p'
+8. delete last 3 lines
+	3dd
+9. undo last 2 changes
+	press 'u' twice
+10. save your file as “bc_v2”
+	w bc_v2
+
+				slide 116
+• Run a sort command of a large file at the background
+	ls -l | sort >file1&
+• Run a sort command of a large file at the background 
+using nohup
+	nohup ls -l | sort >file1&
+• Check what happens when you log off for the above
+	The command which has 'nohup' executes even after logging off
+• Write a command that sleeps for 5 seconds and then 
+prints hello
+	sleep 5
+	echo "hello"
+
+				slide 118
+*Write a command which will print banner saying hello 
+into a file about 3 minutes from now
+	at now + 3 minute
+	echo "hello" >file1
+*Write the command to write the processes that will be 
+running after 10 days into a file ‘processfile’
+	at now + 10 day
+	at -l >processfile
+*Write the command to send birthday wishes to your 
+friend, whose birthday is tomorrow
+	at 12am tomorrow
+	write user6
+	happy birthday
+	
