@@ -1,0 +1,153 @@
+				slide 41
+
+1. Create folder 'Test' in your home directory
+    mkdir test
+2. Create below files
+ - employeelist
+ - skillset
+      cat >employeelist
+      cat >skillset
+3. Create folder Test2 in home directory
+ - create symbolink and hard link for skillset file 
+ - delete skillset file and check if hardlink and symbolic link file exists
+ - explain the difference b/n symbolic and hard links
+	mkdir test2
+	ln -s skillset slink
+	ln skillset hlink
+	rm skillset
+	cat slink //does not exist
+	cat hlink //exists
+
+4. Provide read and write permission to 'user2' group
+ test if user2 group users can access the file
+	chmod 764 file1
+	cat file1
+	cat >>file1
+	
+5. Revoke write permission from user2 group and test the access again
+	chmod 744 file1
+	cat >>file1 
+6. Grant write permission for others and test it 
+	chmod 746 file1
+	cat >>file1
+7. Revoke write permission for others and test again
+	chmod 744 file1
+	cat >>file1
+8. Change the group of employeelist file to 'user3'
+ test if user3 group have access
+	sudo chgrp user3 employeelist
+9. Change ownership of the file to user5 and test
+	sudo chown user5 employeelist
+	ls -l
+10. check how many employees are there (hint: use wc command)
+	wc -w employeelist 
+
+				slide 47
+
+• Create file “File1”
+	cat >File1
+	1
+	2
+	3
+• Append 2 more lines to the same file
+	cat >>File1
+	4
+	5
+• Create File2 with few lines
+	cat >File2
+	a
+	aa
+	aaa
+• Display the contents of both File1 and File2 
+	cat File1
+	cat File2
+  (or use)cat File1 File2
+• Concatenate both File1 & 2
+	cat File1 File2 >File3 
+• Send the above output to File3
+	cat File1 File2 >File3 
+• Read File1,File2,File3… File5 . Observe the output
+	cat File1 File2 File3 File4 File5
+• Redirect the errors of the above command to “errorlog”
+	cat File1 File2 File3 File4 File5 2>errorlog
+• Concatenate name File1 to 5 and store it in File 10. if any 
+errors, log them in the same file 
+	cat File1 File2 File3 File4 File5 >File10 2>&1
+• Copy File1 to File6. Add the errors to “errorlog”
+	cp File1 File6 2>errorlog
+
+				slide 61
+
+*Lines containing A
+	grep -n "A" File1 
+*lines containing The at the beginning
+	grep -n "^The" File1
+*lines ending with .
+	
+*lines with a,b or c as the second letter
+	
+*lines which contain def , deef or deeeef 
+	
+*lines not having numbers at the beginning 
+	grep -v "[0-9]" File1
+*empty lines
+	grep -n "^$" File1
+*list the password file details of user1 - user10
+
+*list only directories
+	ls -d */
+
+*list out the C programs in the current directory which are 
+using math library file (hint: math library file - math.h)
+
+
+				slide 55
+
+* The 10th to 25th lines in a file
+	tail +10 file1 | head -16
+* List only 10th line in a file
+	tail +10 file1 | head -1
+* List only the recently modified file in the current 
+directory
+	find -type f -mtime -1
+* List only the smallest file in the current directory
+	ls -lSr | head -4
+* A data file is updated regularly, each day with 10 new 
+records. New records are appended at the end. 
+ Write the command to print total number of records in 
+the file.
+	wc -l file1
+ Write the command to list only the records entered 3 
+days before. 
+	find -type f -mtime -3
+
+
+				slide 63
+
+*Create a file which contains long listing of the files in 
+root directory
+	ls -l /
+*Sort the file based on the filename descending order(last field)
+	ls | sort -r 
+*Sort the file based only on the inode count
+	ls -i | sort -n
+*Sort the file based on the user name and group name 
+in reverse order
+	 
+*Sort the file based on the file size and store the output 
+in a file called sortedfile
+	ls -laS
+
+				slide 66
+
+*Convert all capital letters into small letters in file
+	cat f1 | tr [:upper:] [:lower]
+*Remove all occurrences of numbers in file
+	tr -d 0-9 <file1
+*remove all occurrences of spaces in a file
+	cat file1 | tr -d "[:blank:]"
+*suppress multiple occurrence of spaces in long listing 
+of filenames
+	
+*count the number of alphabets in the file
+*count the occurrences of ovals in the given file
