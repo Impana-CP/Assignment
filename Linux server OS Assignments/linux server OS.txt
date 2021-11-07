@@ -2,11 +2,13 @@
 
 1. Create folder 'Test' in your home directory
     mkdir test
+
 2. Create below files
  - employeelist
  - skillset
       cat >employeelist
       cat >skillset
+
 3. Create folder Test2 in home directory
  - create symbolink and hard link for skillset file 
  - delete skillset file and check if hardlink and symbolic link file exists
@@ -21,26 +23,33 @@
 4. Provide read and write permission to 'user2' group
  test if user2 group users can access the file
 	chmod 764 file1
+	sudo chgrp user2 file1
 	cat file1
 	cat >>file1
 	
 5. Revoke write permission from user2 group and test the access again
 	chmod 744 file1
-	cat >>file1 
+	cat >>file1
+ 
 6. Grant write permission for others and test it 
-	chmod 746 file1
+	chmod o+w filename
 	cat >>file1
+
 7. Revoke write permission for others and test again
-	chmod 744 file1
+	chmod o-r filename
 	cat >>file1
+
 8. Change the group of employeelist file to 'user3'
  test if user3 group have access
 	sudo chgrp user3 employeelist
+
 9. Change ownership of the file to user5 and test
 	sudo chown user5 employeelist
 	ls -l
+
 10. check how many employees are there (hint: use wc command)
-	wc -w employeelist 
+	wc employeelist 
+
 
 				slide 47
 
@@ -49,30 +58,37 @@
 	1
 	2
 	3
+
 • Append 2 more lines to the same file
 	cat >>File1
 	4
 	5
+
 • Create File2 with few lines
 	cat >File2
 	a
 	aa
 	aaa
+
 • Display the contents of both File1 and File2 
-	cat File1
-	cat File2
-  (or use)cat File1 File2
+	cat File1 File2
+  
 • Concatenate both File1 & 2
-	cat File1 File2 >File3 
+	cat File1 File2 >File3
+ 
 • Send the above output to File3
 	cat File1 File2 >File3 
+
 • Read File1,File2,File3… File5 . Observe the output
 	cat File1 File2 File3 File4 File5
+
 • Redirect the errors of the above command to “errorlog”
 	cat File1 File2 File3 File4 File5 2>errorlog
+
 • Concatenate name File1 to 5 and store it in File 10. if any 
 errors, log them in the same file 
 	cat File1 File2 File3 File4 File5 >File10 2>&1
+
 • Copy File1 to File6. Add the errors to “errorlog”
 	cp File1 File6 2>errorlog
 
@@ -80,18 +96,25 @@ errors, log them in the same file
 
 *Lines containing A
 	grep -n "A" File1 
+
 *lines containing The at the beginning
 	grep -n "^The" File1
+
 *lines ending with .
+	grep '$[.]' file1
 	
 *lines with a,b or c as the second letter
+	grep -ni '[?abc]*' file1
 	
 *lines which contain def , deef or deeeef 
+	cat file1 | grep "def\|deef\|deeef"
 	
 *lines not having numbers at the beginning 
 	grep -v "[0-9]" File1
+
 *empty lines
 	grep -n "^$" File1
+
 *list the password file details of user1 - user10
 
 *list only directories
@@ -105,19 +128,24 @@ using math library file (hint: math library file - math.h)
 
 * The 10th to 25th lines in a file
 	tail +10 file1 | head -16
+
 * List only 10th line in a file
 	tail +10 file1 | head -1
+
 * List only the recently modified file in the current 
 directory
 	find -type f -mtime -1
+
 * List only the smallest file in the current directory
 	ls -lSr | head -4
+
 * A data file is updated regularly, each day with 10 new 
 records. New records are appended at the end. 
  Write the command to print total number of records in 
 the file.
 	wc -l file1
- Write the command to list only the records entered 3 
+
+*Write the command to list only the records entered 3 
 days before. 
 	find -type f -mtime -3
 
@@ -127,66 +155,88 @@ days before.
 *Create a file which contains long listing of the files in 
 root directory
 	ls -l /
+
 *Sort the file based on the filename descending order(last field)
 	ls | sort -r 
+
 *Sort the file based only on the inode count
 	ls -i | sort -n
+
 *Sort the file based on the user name and group name 
 in reverse order
+	ls -r
 	 
 *Sort the file based on the file size and store the output 
 in a file called sortedfile
-	ls -laS
+	ls -laS >sortedfile
 
 				slide 66
 
 *Convert all capital letters into small letters in file
 	cat f1 | tr [:upper:] [:lower]
+
 *Remove all occurrences of numbers in file
 	tr -d 0-9 <file1
+
 *remove all occurrences of spaces in a file
 	cat file1 | tr -d "[:blank:]"
-*suppress multiple occurrence of spaces in long listing 
-of filenames
 	
 *count the number of alphabets in the file
+	grep -o [[:alpha:]] filename | wc -l
+
 *count the occurrences of ovals in the given file
+	grep -o [aeiouAEIOU] file | wc -l
 
 				slide 94
 
 1. Insert an heading at the beginning of the file
+	vi file1
+        i button
+        home button
+
 2 Remove the second line in the file and try undo 
 command
 	press 'esc' to go to command mode
 	place cursor on 2nd line and type 'dd'
 	to undo- press 'u'
+
 3 Search for all occurrences of bc
 	go to last line mode by pressing ':'
 	/bc 
+
 4 Remove the word number
 	:1,$s/number/ 
+
 5 Replace all occurrences of char c in line1 only with C
 	:1s/c/C
+
 6 Replace all occurrences of space with \t
 	:1,$s/ /\t/g
+
 7. copy line 1 to 3 and paste at the end of the file
 	To copy place cursor on 1st line press '3yy'
 	To paste place cursor at last line press 'p'
+
 8. delete last 3 lines
 	3dd
+
 9. undo last 2 changes
 	press 'u' twice
+
 10. save your file as “bc_v2”
 	w bc_v2
 
 				slide 116
 • Run a sort command of a large file at the background
 	ls -l | sort >file1&
+
 • Run a sort command of a large file at the background 
 using nohup
 	nohup ls -l | sort >file1&
+
 • Check what happens when you log off for the above
 	The command which has 'nohup' executes even after logging off
+
 • Write a command that sleeps for 5 seconds and then 
 prints hello
 	sleep 5
@@ -197,13 +247,13 @@ prints hello
 into a file about 3 minutes from now
 	at now + 3 minute
 	echo "hello" >file1
+
 *Write the command to write the processes that will be 
 running after 10 days into a file ‘processfile’
 	at now + 10 day
 	at -l >processfile
+
 *Write the command to send birthday wishes to your 
 friend, whose birthday is tomorrow
-	at 12am tomorrow
-	write user6
-	happy birthday
+	echo "happy birthday" | at now +1 day
 	
