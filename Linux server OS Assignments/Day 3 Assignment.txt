@@ -1,0 +1,248 @@
+
+					slide 142
+
+1.Accept two numbers from the user do all arithmetic 
+operations on them and write the output
+	vi arithop 		#to open vi editor
+	echo "Enter two numbers"
+	read a
+	read b
+	sum=`expr $a + $b`
+	diff=`expr $a - $b`
+	prod=`expr $a \* $b`
+	quot=`expr $a / $b`
+	echo "The sum is $sum"
+	echo "The difference is $diff"
+	echo "The product is $prod"
+	echo "The quotient is $quot"
+	:wq 			#to save and exit from vi editor
+
+	bash arithop  		#to execute the shell program
+
+2.Accept two strings and display them as banner
+	vi str
+	echo "enter two string"
+	read str1
+	read str2
+	a="$str1 $str2"
+	echo $a
+	:wq
+
+	bash str
+
+3.Accept a username and send him a message if the user 
+has logged in
+
+	echo "enter a uname"
+	read a
+	echo $a
+	if who -u | grep -q "^$a"
+	then
+	        write $a
+	        hello
+	else
+	        echo "user not logged in"
+	fi
+
+
+					slide 161
+
+1. Accept 3 numbers and display the greatest number 
+	vi great
+	echo "Enter 3 numbers"
+	read num1
+	read num2
+	read num3
+	if test $num1 -gt $num2 -a $num1 -gt $num3
+	then
+	        echo "$num1 is biggest"
+	elif test $num2 -gt $num1 -a $num2 -gt $num3
+	then
+	        echo "$num2 is biggest"
+	elif test $num3 -gt $num1 -a $num3 -gt $num2
+	then
+	        echo "$num3 is biggest"
+	else
+	        echo "either 2 numbers are equal or all 3 numbers are equal"
+	fi
+	:wq
+
+	bash great
+
+2. Accept a filename and check if the file 
+exists or not, whether it is empty or not.
+
+	echo "enter filename"
+	read file
+	if test -s $file
+	then
+	        echo "file exists and is not empty"
+	elif test -f $file
+	then
+	        echo "file exists and is empty"
+	else
+	        echo "file does'nt exist"
+	fi
+
+
+
+3. Create a simple quiz with 2 quiz questions
+ (Write a shell script that asks the above questions to 
+the user and prints the score at the end)
+	vi quiz
+	score=0
+	echo "give the correct answer and get points"
+	echo "how many sides does square have?"
+	read a
+	if test $a -eq 4
+	then
+        	point=`expr $score + 1`
+	else
+	        point=`expr $score + 0`
+	fi
+
+	echo "how many sides does a pentagon have?"
+	read b
+	if test $b -eq 5
+	then
+	        point=`expr $point + 1`
+	else
+	        point=`expr $point + 0`
+	fi
+
+	echo "the total score is $point"
+	:wq
+
+	bash quiz
+
+
+					slide 169
+
+1.Accept a set of arguments from the user and find the 
+largest of them.
+	vi large
+	echo "enter total num of args required"
+	read N
+	i=1
+	max=0
+	echo "enter numbers"
+	while [ $i -le $N ]
+	do
+	   read num
+	   if [ $num -gt $max ]
+	     then
+	        max=$num
+	   fi
+	   i=$((i+1))
+	done
+	echo "the largest num is $num"
+	:wq
+
+	bash large
+
+
+2.Accept numbers from the user till 0 is passed and add 
+them.
+
+	read a
+	sum=0
+	until [ $a -eq 0 ]
+	do
+	        sum=` expr $sum + $a `
+	        read a
+	done
+	echo $sum
+
+
+3.Accept a filename from the user and for every word in 
+the file display the word and the no of characters in it.
+	
+
+
+					slide 150
+
+1. Accept a 12 arguments form the user and display the 
+program name, the 2,4,6,8,10 and 12th argument 
+values
+	vi arg
+	echo $0
+	echo $2
+	echo $4
+	echo $6
+	echo $8
+	echo $10
+	echo $12
+	:wq
+
+	bash arg 1 2 3 4 5 6 7 8 9 10 11 12
+
+2. Accept as many arguments as the user wants and 
+display them all in capitals
+
+	echo "enter arguments"
+	read a
+	until [ $a = "EOF" ]
+	do
+	echo $a | tr '[:lower:]' '[:upper:]'
+	read a
+	done
+
+
+3. Write a script which sets some default values to two 
+command line arguments if they are not given by the 
+user
+
+	echo $1
+	echo $2
+	echo $3
+	set 10 100
+	echo $1
+	echo $2
+	echo $3
+
+
+
+   					slide 176
+
+1. Accept a character from the user and display if it is 
+a number or alphabet and others in case of any 
+other character. Do this till the user enters empty 
+value
+	
+	read a
+	while [ $a != "EOF" ]
+	do
+	        case $a in
+	                [0-9]*) echo "number";;
+	                [a-z]*) echo "alphabet";;
+	                [A-Z]*) echo "alphabet";;
+	                *) echo "others";;
+	        esac
+	        read a
+	done
+
+
+2. Write a script that asks for the capital of India and 
+repeats the question until the users enters correct.
+	
+	echo "which is the capital of India?"
+	read a
+	echo $a
+	until [ $a = "Delhi" ]
+	do
+	        read a
+	done
+	echo "$a is correct"
+
+3. Write a script delete that will store the file 
+somewhere before deleting.
+
+	echo "enter file name"
+	read a
+	echo "enter a filename with path to copy"
+	read b
+	cp $a $b
+	rm $a
+	cat $b
+ 
+
